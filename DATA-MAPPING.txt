@@ -1,0 +1,48 @@
+DATA MAPPING NOTES
+==================
+
+PRODUCTS DETAILS.xlsx -> data/products.json
+- Group / company name -> group and rawGroup
+- Item code -> code
+- Product description -> description
+- Unit -> unit
+- HSN code -> hsn
+- GST -> gst and gstLabel
+- List rate -> listRate
+- MRP -> mrp
+- Segment / vehicle / model -> mapped from available segment catalogue data and catalogue-description rules
+- Group Wise Catagory.xlsx -> category and categories
+
+Group Wise Catagory.xlsx -> data/categories.json
+- Group -> group
+- Product description/category family -> description
+- All category columns -> categories array
+- Matching catalogue count -> productCount
+
+ASSET MAPPING
+- RAJ GROUP.png -> assets/raj-logo.png
+- SEGMENTS.png -> assets/segments-overview.png
+- OFFICE IMAGE.png -> assets/office-image.webp
+- segment folder -> assets/segments/
+- owner folder -> assets/owners/
+- brands folder -> assets/brands/
+- certificate folder -> assets/certificates/
+
+NOTE
+The original spreadsheets are preserved in source-data/. Website JSON is generated for browser performance and does not modify the source workbooks.
+
+Product category images -> data/product-categories.json + assets/categories/
+- DATA_INPUT/categories image filename -> category name matching
+- Category product counts -> PRODUCTS DETAILS.xlsx + Group Wise Catagory.xlsx mapping
+- Unmatched supplied category images are also kept in the category carousel with zero count until mapped.
+
+V4 OPTIONAL SALES MAPPING
+-------------------------
+For the homepage "Latest Deals for This Week" section, add any one of these columns to PRODUCTS DETAILS.xlsx:
+Sales Qty | Qty Sold | Sold Qty | Quantity Sold | Total Sales | Sales | Sold
+The updater sorts that section by the highest numeric value. When the column is absent, the website uses a stable catalogue fallback order.
+
+COMPANY BOOKLET
+---------------
+Replace DATA_INPUT/RAJ GROUP SALES BOOKLET.pdf and run UPDATE_WEBSITE.bat.
+The footer download button will use website/assets/docs/raj-group-company-booklet.pdf.

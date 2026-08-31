@@ -1,0 +1,4 @@
+# OPTIONAL EXTERNAL IMAGE FOLDER
+# Normal use me images public\assets\products me hi rakhein.
+# Agar images kisi aur folder me hain, project root ke PRODUCT_IMAGE_FOLDER.txt
+# me us folder ka full path likhein.

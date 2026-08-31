@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Raj Agencies automotive spare parts catalogue and company website template." name="description"/>
+<title>Raj Agencies | Automotive Parts &amp; Tools</title>
+<link href="styles.css" rel="stylesheet"/><link href="custom.css?v=11" rel="stylesheet"/>
+</head>
+<body>
+<div class="promo-strip">
+<div class="shell promo-inner">
+<div><b>Special Trade Offer!</b> Demo discounts on selected automotive parts.</div>
+<div class="promo-center">Fast dispatch support across Gujarat.</div>
+<div aria-label="Offer countdown" class="countdown"><span id="days">07</span><i>d</i><span id="hours">00</span><i>h</i><span id="mins">00</span><i>m</i><span id="secs">00</span><i>s</i></div>
+</div>
+</div>
+<div class="utility-bar">
+<div class="shell utility-inner">
+<nav aria-label="Utility navigation" class="utility-links">
+<a href="about.html">About Us</a>
+<button data-open="accountModal" type="button">My account</button>
+<a href="order-tracking.html">Order Tracking</a>
+<button data-open="wishlistDrawer" type="button">Wishlist <span class="mini-count" id="utilityWishlistCount">0</span></button>
+</nav>
+<div class="utility-selects">
+<label><span class="sr-only">Language</span><select><option>English</option><option>Hindi</option><option>Gujarati</option></select></label>
+<label><span class="sr-only">Currency</span><select><option>INR</option><option>USD</option><option>GBP</option></select></label>
+</div>
+</div>
+</div>
+<header class="site-header">
+<div class="shell masthead">
+<a aria-label="Raj Agencies home" class="brand" href="index.html">
+<img alt="Raj Group logo" src="assets/raj-logo.png"/>
+<span><b>RAJ AGENCIES</b><small>Your Trusted Partner in Automotive Parts</small></span>
+</a>
+<form class="main-search" id="mainSearchForm">
+<select aria-label="Search category" id="headerCategory"><option value="">All Categories</option></select>
+<input autocomplete="off" id="headerSearch" placeholder="Search for products, brands, codes..." type="search"/>
+<button aria-label="Search" type="submit">⌕</button>
+<div class="search-suggestions" id="searchSuggestions"></div>
+</form>
+<div class="header-actions">
+<button class="header-action account-action" data-open="accountModal" type="button"><span class="action-icon">♙</span><span><small>My Account</small><b>Hello, Sign in</b></span></button>
+<button aria-label="Wishlist" class="icon-action" data-open="wishlistDrawer" type="button">♡<em id="wishlistCount">0</em></button>
+<button class="cart-action" data-open="cartDrawer" type="button"><span class="cart-icon">🛒</span><span><small><b id="cartCount">0</b> items</small><strong id="cartTotal">₹0.00</strong></span></button>
+</div>
+</div>
+<div class="nav-row">
+<div class="shell nav-inner">
+<div class="category-nav">
+<button class="category-nav-toggle" id="categoryNavToggle" type="button">☰ <b>All Categories</b><span>⌄</span></button>
+<div class="category-mega dynamic-category-mega" id="categoryMega">
+<div class="category-menu-loading">Loading category groups…</div>
+</div>
+</div>
+<nav aria-label="Main navigation" class="main-nav">
+<div class="nav-item has-mega"><a href="index.html">Home <span>⌄</span></a><div class="nav-mega compact"><a href="scheme.html">Scheme</a><a href="offers.html">Offers</a><a href="new-launch.html">New Launch</a><a href="latest-news.html">Latest News</a><a href="gallery.html">Gallery</a></div></div>
+<div class="nav-item has-mega"><a href="#shop">Shop <span>⌄</span></a><div class="nav-mega compact branch-menu"><h4>Shop &amp; Branches</h4><a href="shop.html#shop">All Products</a><a href="branches.html#head-office">Head Office — Kamrej</a><a href="branches.html#ahmedabad">Ahmedabad</a><a href="branches.html#surat-2w">Surat — 2 Wheeler</a><a href="branches.html#nasik">Nasik — Maharashtra</a><a href="branches.html#navsari">Navsari — 2 Wheeler</a><a href="branches.html#raj-tyres">Raj Tyres — Kamrej</a></div></div>
+<a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a>
+</nav>
+<a class="nav-help" href="tel:+917046533330"><span>☎</span><small>Need Help?</small><b>+91 70465 33330</b></a>
+<button aria-label="Open menu" class="mobile-menu-btn" id="mobileMenuBtn" type="button">☰</button>
+</div>
+</div>
+</header>
+<div aria-hidden="true" class="mobile-menu" id="mobileMenu"><div class="mobile-menu-head"><b>Main Menu</b><button data-close="" type="button">×</button></div><div class="mobile-menu-search"><input id="mobileSearch" placeholder="What are you looking for?"/><button id="mobileSearchBtn">⌕</button></div><div class="mobile-menu-section-title">Home</div><a href="scheme.html">Scheme</a><a href="offers.html">Offers</a><a href="new-launch.html">New Launch</a><a href="latest-news.html">Latest News</a><a href="gallery.html">Gallery</a><div class="mobile-menu-section-title">Shop &amp; Branches</div><a href="shop.html#shop">All Products</a><a href="branches.html#head-office">Head Office — Kamrej</a><a href="branches.html#ahmedabad">Ahmedabad</a><a href="branches.html#surat-2w">Surat — 2 Wheeler</a><a href="branches.html#nasik">Nasik — Maharashtra</a><a href="branches.html#navsari">Navsari — 2 Wheeler</a><a href="branches.html#raj-tyres">Raj Tyres — Kamrej</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="contact.html">Contact</a><a href="order-tracking.html">Order Tracking</a><div class="mobile-contact"><b>Contact Details</b><a href="tel:+917046533330">+91 70465 33330</a><a href="https://wa.me/918128242316" rel="noopener" target="_blank">WhatsApp Auto Service</a></div></div>
+<div class="page-overlay" id="pageOverlay"></div>
+<main>
+<section class="shop-hero">
+<div class="shell shop-hero-inner">
+<div class="shop-hero-copy"><span>On Sale This Week</span><h1>Get the Right Part at the Right Price for Your Vehicle</h1><p>Demo promotional content for Raj Agencies. Banner text and imagery can be changed from the template files later.</p><a href="#shop">Shop Now <b>→</b></a></div>
+<div class="hero-parts hero-uploaded"><img src="assets/hero/raj-vehicle-range.png" alt="Commercial, agricultural and passenger vehicle range"/></div></div></section>
+<section class="shop-section" id="shop">
+<div class="shell">
+<div class="shop-topline">
+<button class="mobile-filter-open" id="mobileFilterOpen" type="button">☷ Filter</button>
+<div id="resultSummary">Showing products</div>
+<div class="shop-tools">
+<label>Sort: <select id="sortSelect"><option value="latest">Sort by latest</option><option value="popularity">Sort by popularity</option><option value="rating">Sort by average rating</option><option value="priceAsc">Sort by price: low to high</option><option value="priceDesc">Sort by price: high to low</option><option value="name">Sort by name</option></select></label>
+<label>Show: <select id="pageSize"><option selected="" value="25">25 Items</option><option value="50">50 Items</option><option value="75">75 Items</option><option value="100">100 Items</option></select></label>
+<div class="view-buttons"><button aria-label="Grid view" class="active" id="gridView" type="button">▦</button><button aria-label="List view" id="listView" type="button">☷</button></div>
+</div>
+</div>
+<div class="shop-layout">
+<aside class="filter-sidebar" id="filterSidebar">
+<div class="mobile-filter-head"><b>Filter Products</b><button id="mobileFilterClose" type="button">×</button></div>
+<section class="filter-card vehicle-card">
+<h3>Find the Right Parts Faster</h3>
+<p>Select a segment, vehicle and model to narrow the catalogue.</p>
+<select id="segmentFilter"><option value="">Select Segment</option></select>
+<select id="vehicleFilter"><option value="">Select Vehicle</option></select>
+<select id="modelFilter"><option value="">Select Model</option></select>
+<button id="vehicleFindBtn" type="button">Find Auto Parts</button>
+<small>Please fill in the criteria you are looking for.</small>
+</section>
+<section class="filter-card filter-search-card"><h3>Search Products</h3><div><input id="catalogSearch" placeholder="Product name, code or model"/><button id="catalogSearchBtn">⌕</button></div></section>
+<section class="filter-card"><h3>All Product Categories</h3><input class="brand-search" id="categorySearch" placeholder="Search category"/><div class="scroll-checks category-list" id="categoryChecks"></div></section>
+<section class="filter-card"><h3>Product Segments</h3><input class="brand-search" id="segmentSearch" placeholder="Search segment"/><div class="scroll-checks segment-list" id="segmentChecks"></div></section>
+<section class="filter-card"><h3>Filter by Price</h3><div class="price-range"><input id="minPrice" min="0" placeholder="Min price" type="number"/><input id="maxPrice" min="0" placeholder="Max price" type="number"/></div><button class="outline-btn" id="priceFilterBtn" type="button">Filter</button><p class="price-label">Price: <b id="priceLabel">₹0 — ₹25,000</b></p></section>
+<section class="filter-card"><h3>Product Status</h3><label><input id="stockOnly" type="checkbox"/> In Stock</label><label><input id="saleOnly" type="checkbox"/> On Sale</label></section>
+<section class="filter-card color-filter"><h3>Filter by Color</h3><label><input name="color" type="checkbox" value="Black"/><i class="swatch black"></i> Black <span>(12)</span></label><label><input name="color" type="checkbox" value="Blue"/><i class="swatch blue"></i> Blue <span>(8)</span></label><label><input name="color" type="checkbox" value="Red"/><i class="swatch red"></i> Red <span>(6)</span></label><label><input name="color" type="checkbox" value="Yellow"/><i class="swatch yellow"></i> Yellow <span>(5)</span></label></section>
+<section class="filter-card"><h3>Brands</h3><input class="brand-search" id="brandSearch" placeholder="Search brand"/><div class="scroll-checks brand-list" id="brandChecks"></div></section>
+<button class="reset-filters" id="resetFilters" type="button">Reset All Filters</button>
+</aside>
+<section class="catalog-area">
+<div class="active-filters" id="activeFilters"></div>
+<div class="product-grid" id="productGrid"><div class="loading">Loading product catalogue…</div></div>
+<nav aria-label="Product pages" class="pagination" id="pagination"></nav>
+</section>
+</div>
+</div>
+</section>
+<section class="brand-band" id="brands">
+<div class="shell"><div class="section-title-row"><div><span>Trusted Associations</span><h2>Shop by Brand</h2></div><a href="#shop">View all brands →</a></div><div class="brand-rail" id="brandRail"><div>Loading brands…</div></div></div>
+</section>
+<section class="about-preview" id="about">
+<div class="shell about-preview-grid">
+<div class="about-art"><div class="warehouse"><b>RAJ AGENCIES</b><span>Automotive Parts Distribution</span><i class="door d1"></i><i class="door d2"></i><i class="door d3"></i></div><div class="experience-badge"><strong>29+</strong><span>Years of trust</span></div></div>
+<div class="about-copy"><span class="section-kicker">About Raj Agencies</span><h2>A reliable automotive spare parts partner since 1997</h2><p>Raj Agencies serves retailers, workshops and channel partners through a wide product portfolio, structured logistics and a professional team. This section uses company-profile information and can be edited from the HTML.</p><div class="feature-list"><div><b>1,200+</b><span>Key retailers</span></div><div><b>45+</b><span>Company associations</span></div><div><b>130</b><span>Team members</span></div><div><b>40,000 sq. ft.</b><span>Owned operating space</span></div></div><a class="primary-link" href="about.html">Discover Our Company →</a></div>
+</div>
+</section>
+<section class="services-preview" id="services">
+<div class="shell"><div class="section-title-row"><div><span>What We Do</span><h2>Services &amp; Capabilities</h2></div><a href="services.html">View all services →</a></div><div class="service-cards"><article><i>▦</i><h3>Wholesale Distribution</h3><p>Automotive spare parts supply for retailers, workshops and channel partners.</p><a href="services.html">Learn more →</a></article><article><i>🚚</i><h3>Logistics &amp; Delivery</h3><p>Coordinated dispatch and delivery support through a dedicated operating network.</p><a href="services.html">Learn more →</a></article><article><i>▤</i><h3>ERP Order Management</h3><p>Structured order processing, inventory visibility and dispatch tracking.</p><a href="services.html">Learn more →</a></article><article><i>◉</i><h3>WhatsApp Digital Services</h3><p>Catalogues, price lists, branch details, GST information and service support.</p><a href="https://wa.me/918128242316?text=Hi" rel="noopener" target="_blank">Start service →</a></article></div></div>
+</section>
+<section class="branch-preview" id="branches">
+<div class="shell"><div class="section-title-row light-title"><div><span>Our Network</span><h2>Branches &amp; Locations</h2></div><a href="branches.html">All locations →</a></div><div class="branch-cards"><article><small>Head Office</small><h3>Kamrej, Surat</h3><p>01 Dev Darshan Complex, Navagam, Kamrej Char Rasta, Surat – 394185.</p><a href="tel:+917046533330">+91 70465 33330</a></article><article><small>Branch</small><h3>Ahmedabad</h3><p>Mittal Estate, Sarkhej Railway Bridge, Ujala Chokdi, Ahmedabad.</p><a href="tel:+919724310895">+91 97243 10895</a></article><article><small>2-Wheeler</small><h3>Surat</h3><p>Hatiwala Compound, Umarwada, Surat – 395010.</p><a href="tel:+917359277640">+91 73592 77640</a></article><article><small>Branch</small><h3>Nasik</h3><p>Tigraniya, Dwarka, Nasik, Maharashtra – 422009.</p><a href="tel:+918128672639">+91 81286 72639</a></article></div></div>
+</section>
+<section class="newsletter">
+<div class="shell newsletter-inner"><div class="newsletter-icon">✉</div><div><span>Join our newsletter for trade updates</span><h2>Get new product, catalogue and promotion information</h2><p>Demo subscription section. Connect this form to your email service when the site goes live.</p></div><form id="newsletterForm"><input placeholder="Your email address" required="" type="email"/><button type="submit">Subscribe</button><label><input required="" type="checkbox"/> I agree to receive business updates.</label></form></div>
+</section>
+<section class="trust-strip"><div class="shell trust-grid"><div><i>↺</i><span><b>Easy Enquiry</b><small>WhatsApp product support</small></span></div><div><i>🚚</i><span><b>Delivery Network</b><small>Across operating regions</small></span></div><div><i>✓</i><span><b>Trusted Supply</b><small>Established since 1997</small></span></div><div><i>☎</i><span><b>Customer Support</b><small>+91 70465 33330</small></span></div></div></section>
+</main>
+<footer class="site-footer">
+<div class="shell footer-main">
+<div class="footer-company"><img alt="Raj Group" src="assets/raj-logo.png"/><p>Raj Agencies is an automotive spare parts distribution company serving trade partners across Gujarat and nearby markets.</p><a href="mailto:info@rajagencies.example">info@rajagencies.example</a><div class="footer-social"><a href="https://www.instagram.com/raj.agencies123/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/alpesh.jogani.5076/" rel="noopener" target="_blank">Facebook</a></div></div>
+<div><h4>Need Help?</h4><a class="footer-phone" href="tel:+917046533330">+91 70465 33330</a><p>Monday – Saturday<br/>9:00 AM – 7:00 PM</p><a href="https://wa.me/918128242316" rel="noopener" target="_blank">WhatsApp: +91 81282 42316</a></div>
+<div><h4>Customer Service</h4><a href="contact.html">Help Center</a><button data-open="accountModal" type="button">My Account</button><a href="order-tracking.html">Track Products</a><a href="cart.html">My Orders</a><button data-open="wishlistDrawer" type="button">Your Wishlist</button><a href="returns.html">Return Policy</a></div>
+<div><h4>Store Information</h4><a href="about.html">About Raj Agencies</a><a href="#shop">Bestsellers</a><a href="#shop">Latest Products</a><a href="#shop">New Discounts</a><a href="#shop">Sale Products</a><a href="branches.html">Branch Network</a></div>
+<div class="footer-booklet"><div class="booklet-icon">▤</div><h4>Company Booklet</h4><p>Download the complete Raj Agencies company profile, infrastructure, services and business information.</p><a class="booklet-download" download="" href="assets/docs/raj-group-company-booklet.pdf">Download PDF <span>↓</span></a></div></div>
+<div class="footer-offers"><div class="shell"><span><b>-5% demo offer</b> for selected template items <a href="#shop">Shop now</a></span><span><b>Trade delivery support</b> subject to order and location</span></div></div>
+<div class="footer-bottom"><div class="shell"><div><a href="privacy.html">Privacy Policy</a><a href="order-tracking.html">Order Tracking</a><a href="terms.html">Terms and Conditions</a><a href="returns.html">Refund and Returns Policy</a></div><p>Copyright <span id="year"></span> © Raj Agencies. Template implementation for customization.</p></div></div>
+</footer>
+<div class="mobile-bottom-nav"><a href="index.html"><i>⌂</i><span>Home</span></a><button id="bottomFilter" type="button"><i>☷</i><span>Filter</span></button><button id="bottomSearch" type="button"><i>⌕</i><span>Search</span></button><button data-open="wishlistDrawer" type="button"><i>♡</i><span>Wishlist</span></button><button data-open="accountModal" type="button"><i>♙</i><span>Account</span></button></div>
+<aside aria-hidden="true" class="drawer cart-drawer" id="cartDrawer"><div class="drawer-head"><b>Shopping Cart</b><button data-close="" type="button">×</button></div><div class="drawer-content" id="cartItems"><div class="empty-state">No products in the cart.</div></div><div class="drawer-footer"><div><span>Subtotal</span><b id="drawerCartTotal">₹0.00</b></div><a href="cart.html">View Cart</a><a class="checkout-button" href="checkout.html">Checkout</a></div></aside>
+<aside aria-hidden="true" class="drawer" id="wishlistDrawer"><div class="drawer-head"><b>Your Wishlist</b><button data-close="" type="button">×</button></div><div class="drawer-content" id="wishlistItems"><div class="empty-state">Your wishlist is empty.</div></div></aside>
+<div aria-hidden="true" class="modal" id="accountModal"><div class="modal-card"><button class="modal-close" data-close="" type="button">×</button><div class="account-logo"><img alt="Raj Group" src="assets/raj-logo.png"/></div><h2>My Account</h2><p>Sign in to review orders, saved products and account information.</p><form id="loginForm"><label>Email or phone<input placeholder="Email or mobile number" required="" type="text"/></label><label>Password<input placeholder="Password" required="" type="password"/></label><div class="form-between"><label><input type="checkbox"/> Remember me</label><a href="#">Forgot password?</a></div><button type="submit">Log In</button></form><small>New customer? <a href="#">Create an account</a></small></div></div>
+<div aria-hidden="true" class="quick-view" id="quickView"><div class="quick-view-card"><button class="modal-close" data-close="" type="button">×</button><div class="quick-image"><img class="raj-product-fallback-logo" src="assets/raj-group-product-fallback.png" alt="Raj Group" data-raj-fallback-logo="true"/></div><div class="quick-copy"><small id="quickBrand">RAJ AGENCIES</small><h2 id="quickTitle">Product name</h2><div class="quick-rating">★★★★★ <span>Catalogue product</span></div><div class="quick-price"><span class="quick-price-label">MRP</span><b id="quickPrice">Price on Request</b></div><div class="quick-detail-grid"><div><span>Part Number</span><b id="quickCode">—</b></div><div><span>HSN / GST</span><b id="quickTax">—</b></div><div><span>Unit</span><b id="quickUnit">PCS</b></div><div><span>Category</span><b id="quickCategory">—</b></div><div><span>Segment</span><b id="quickSegment">—</b></div><div><span>Vehicle</span><b id="quickVehicle">—</b></div><div class="quick-wide"><span>Model</span><b id="quickModel">—</b></div><div data-optional-product-field="std" hidden><span>Std. Pkg.</span><b id="quickStdPkg">—</b></div><div data-optional-product-field="crt" hidden><span>Crt. Pkg.</span><b id="quickCrtPkg">—</b></div></div><p class="quick-summary" id="quickDescription">Product details will appear here.</p><ul class="quick-benefits"><li>Catalogue item reference</li><li>Vehicle and model information available</li><li>Confirm final availability before ordering</li></ul><div class="quick-actions"><button id="quickAddCart">Add to cart</button><a id="quickWhatsApp" rel="noopener" target="_blank">Order on WhatsApp</a></div></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="site-config.js"></script>
+<script src="smart-select.js"></script>
+<script src="category-menu.js"></script>
+<script src="product-image-resolver.js?v=11"></script>
+<script src="app.js?v=11"></script></body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Raj Agencies automotive spare parts home page and product catalogue." name="description"/>
+<title>Raj Agencies | Automotive Parts &amp; Tools</title>
+<link href="styles.css" rel="stylesheet"/>
+<link href="home.css" rel="stylesheet"/>
+<link href="custom.css?v=11" rel="stylesheet"/>
+<script>
+/* Fast first paint: read only enough of products.json to show the default AAYUB group.
+   The complete catalogue continues to load normally through home.js afterwards. */
+window.__RAJ_FAST_AAYUB__ = (() => {
+  'use strict';
+  const DEFAULT_GROUP = 'AAYUB';
+  const LIMIT = 25;
+
+  return (async () => {
+    const response = await fetch('data/products.json?fast=aayub-v12', {
+      cache: 'force-cache',
+      headers: { Range: 'bytes=0-2200000' },
+      priority: 'high'
+    });
+    if (!response.ok && response.status !== 206) throw new Error(`Fast catalogue HTTP ${response.status}`);
+    if (!response.body) return [];
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    const found = [];
+    let productIndex = -1;
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+    let objectText = '';
+
+    const consume = text => {
+      for (let i = 0; i < text.length; i += 1) {
+        const character = text[i];
+        if (depth === 0) {
+          if (character === '{') {
+            depth = 1;
+            inString = false;
+            escaped = false;
+            objectText = '{';
+          }
+          continue;
+        }
+
+        objectText += character;
+        if (inString) {
+          if (escaped) escaped = false;
+          else if (character === '\\') escaped = true;
+          else if (character === '"') inString = false;
+          continue;
+        }
+        if (character === '"') {
+          inString = true;
+          continue;
+        }
+        if (character === '{') {
+          depth += 1;
+          continue;
+        }
+        if (character !== '}') continue;
+
+        depth -= 1;
+        if (depth !== 0) continue;
+        productIndex += 1;
+        try {
+          const product = JSON.parse(objectText);
+          if (String(product.group || '').trim().toUpperCase() === DEFAULT_GROUP) {
+            product._id = product.id || `${product.code || 'item'}-${productIndex}`;
+            found.push(product);
+          }
+        } catch (_) {}
+        objectText = '';
+        if (found.length >= LIMIT) return true;
+      }
+      return false;
+    };
+
+    while (found.length < LIMIT) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      if (consume(decoder.decode(value, { stream: true }))) break;
+    }
+    try { await reader.cancel(); } catch (_) {}
+    return found;
+  })().catch(error => {
+    console.warn('Fast AAYUB preview could not load:', error);
+    return [];
+  });
+})();
+</script>
+
+</head>
+<body class="home-page">
+<div class="promo-strip">
+<div class="shell promo-inner">
+<div><b>Special Trade Offer!</b> Enquire for current dealer pricing and stock.</div>
+<div class="promo-center">Wholesale automotive spare parts supply across Gujarat.</div>
+<div aria-label="Offer countdown" class="countdown"><span id="days">07</span><i>d</i><span id="hours">00</span><i>h</i><span id="mins">00</span><i>m</i><span id="secs">00</span><i>s</i></div>
+</div>
+</div>
+<div class="utility-bar">
+<div class="shell utility-inner">
+<nav aria-label="Utility navigation" class="utility-links">
+<a href="about.html">About Us</a>
+<button data-open="accountModal" type="button">My account</button>
+<a href="order-tracking.html">Order Tracking</a>
+<button data-open="wishlistDrawer" type="button">Wishlist <span class="mini-count" id="utilityWishlistCount">0</span></button>
+</nav>
+<div class="utility-help">Need help? Call us: <a href="tel:+917046533330">+91 70465 33330</a></div>
+<div class="utility-selects">
+<label><span class="sr-only">Language</span><select><option>English</option><option>Hindi</option><option>Gujarati</option></select></label>
+<label><span class="sr-only">Currency</span><select><option>INR</option><option>USD</option><option>GBP</option></select></label>
+</div>
+</div>
+</div>
+<header class="site-header">
+<div class="shell masthead">
+<a aria-label="Raj Agencies home" class="brand" href="index.html">
+<img alt="Raj Group logo" src="assets/raj-logo.png"/>
+<span><b>RAJ AGENCIES</b><small>Your Trusted Partner in Automotive Parts</small></span>
+</a>
+<form class="main-search" id="mainSearchForm">
+<select aria-label="Search category" id="headerCategory"><option value="">All Categories</option></select>
+<input autocomplete="off" id="headerSearch" placeholder="Search products, brands, item codes..." type="search"/>
+<button aria-label="Search" type="submit">⌕</button>
+<div class="search-suggestions" id="searchSuggestions"></div>
+</form>
+<div class="header-actions">
+<button class="header-action account-action" data-open="accountModal" type="button"><span class="action-icon">♙</span><span><small>My Account</small><b>Hello, Sign in</b></span></button>
+<button aria-label="Wishlist" class="icon-action" data-open="wishlistDrawer" type="button">♡<em id="wishlistCount">0</em></button>
+<button class="cart-action" data-open="cartDrawer" type="button"><span class="cart-icon">🛒</span><span><small><b id="cartCount">0</b> items</small><strong id="cartTotal">₹0</strong></span></button>
+</div>
+</div>
+<div class="nav-row">
+<div class="shell nav-inner">
+<div class="category-nav">
+<button class="category-nav-toggle" id="categoryNavToggle" type="button">☰ <b>All Categories</b><span>⌄</span></button>
+<div class="category-mega dynamic-category-mega" id="categoryMega">
+<div class="category-menu-loading">Loading category groups…</div>
+</div>
+</div>
+<nav aria-label="Main navigation" class="main-nav">
+<div class="nav-item has-mega"><a href="index.html">Home <span>⌄</span></a><div class="nav-mega compact"><a href="scheme.html">Scheme</a><a href="offers.html">Offers</a><a href="new-launch.html">New Launch</a><a href="latest-news.html">Latest News</a><a href="gallery.html">Gallery</a></div></div>
+<div class="nav-item has-mega"><a href="shop.html#shop">Shop <span>⌄</span></a><div class="nav-mega compact branch-menu"><h4>Shop &amp; Branches</h4><a href="shop.html#shop">All Products</a><a href="branches.html#head-office">Head Office — Kamrej</a><a href="branches.html#ahmedabad">Ahmedabad</a><a href="branches.html#surat-2w">Surat — 2 Wheeler</a><a href="branches.html#nasik">Nasik — Maharashtra</a><a href="branches.html#navsari">Navsari — 2 Wheeler</a><a href="branches.html#raj-tyres">Raj Tyres — Kamrej</a></div></div>
+<a href="about.html">About</a><a href="services.html">Services</a><a href="contact.html">Contact</a>
+</nav>
+<a class="nav-help" href="tel:+917046533330"><span>☎</span><small>Need Help?</small><b>+91 70465 33330</b></a>
+<button aria-label="Open menu" class="mobile-menu-btn" id="mobileMenuBtn" type="button">☰</button>
+</div>
+</div>
+</header>
+<div aria-hidden="true" class="mobile-menu" id="mobileMenu"><div class="mobile-menu-head"><b>Main Menu</b><button data-close="" type="button">×</button></div><div class="mobile-menu-search"><input id="mobileSearch" placeholder="What are you looking for?"/><button id="mobileSearchBtn">⌕</button></div><div class="mobile-menu-section-title">Home</div><a href="scheme.html">Scheme</a><a href="offers.html">Offers</a><a href="new-launch.html">New Launch</a><a href="latest-news.html">Latest News</a><a href="gallery.html">Gallery</a><div class="mobile-menu-section-title">Shop &amp; Branches</div><a href="shop.html#shop">All Products</a><a href="branches.html#head-office">Head Office — Kamrej</a><a href="branches.html#ahmedabad">Ahmedabad</a><a href="branches.html#surat-2w">Surat — 2 Wheeler</a><a href="branches.html#nasik">Nasik — Maharashtra</a><a href="branches.html#navsari">Navsari — 2 Wheeler</a><a href="branches.html#raj-tyres">Raj Tyres — Kamrej</a><a href="about.html">About Us</a><a href="services.html">Services</a><a href="contact.html">Contact</a><a href="order-tracking.html">Order Tracking</a><div class="mobile-contact"><b>Contact Details</b><a href="tel:+917046533330">+91 70465 33330</a><a href="https://wa.me/918128242316" rel="noopener" target="_blank">WhatsApp Auto Service</a></div></div>
+<div class="page-overlay" id="pageOverlay"></div>
+<main>
+<section class="home-stage-wrap">
+<div class="shell home-stage">
+<aside aria-label="Product categories" class="home-category-panel" id="homeCategoryPanel">
+<h3><span>☰</span> Only Categories</h3>
+<div class="home-category-groups" id="homeCategoryGroups"><div class="category-menu-loading">Loading product categories…</div></div>
+</aside>
+<div class="hero-slider image-hero-slider" id="heroSlider">
+<article class="hero-slide hero-slide-one active">
+<a aria-label="Explore Raj Agencies catalogue" class="hero-image-link" href="shop.html#shop">
+<img alt="We make parts sourcing hassle free" data-hero-image="" data-hero-index="0" src="assets/hero/01-parts-sourcing.webp"/>
+</a>
+</article>
+<article class="hero-slide hero-slide-two">
+<a aria-label="Shop automotive spare parts" class="hero-image-link" href="shop.html#shop">
+<img alt="Choose a trusted automotive parts supplier" data-hero-image="" data-hero-index="1" src="assets/hero/02-trusted-supplier.webp"/>
+</a>
+</article>
+<article class="hero-slide hero-slide-three">
+<a aria-label="Browse the Raj Agencies product network" class="hero-image-link" href="shop.html#shop">
+<img alt="Raj Agencies product network across vehicle segments" data-hero-image="" data-hero-index="2" src="assets/hero/03-product-network.webp"/>
+</a>
+</article>
+<div class="hero-dots" id="heroDots"><button aria-label="Slide 1" class="active"></button><button aria-label="Slide 2"></button><button aria-label="Slide 3"></button></div>
+<button aria-label="Previous slide" class="hero-arrow hero-prev" id="heroPrev">‹</button><button aria-label="Next slide" class="hero-arrow hero-next" id="heroNext">›</button>
+</div>
+<aside class="finder-stack">
+<section class="vehicle-finder-card">
+<div class="finder-heading"><span>⌕</span><div><h2>Find the Right Parts Faster</h2><p>Choose your vehicle details to narrow the catalogue.</p></div></div>
+<label>Segment<select id="homeSegment"><option value="">Select Segment</option></select></label>
+<label>Vehicle<select id="homeVehicle"><option value="">Select Vehicle</option></select></label>
+<label>Model<select id="homeModel"><option value="">Select Model</option></select></label>
+<button id="homeFindParts">Find Auto Parts</button>
+<small>Please fill in the criteria you are looking for.</small>
+</section>
+<a class="finder-help" href="https://wa.me/918128242316?text=Hi" rel="noopener" target="_blank"><img alt="WhatsApp" src="assets/whatsapp.png"/><div><small>Need catalogue help?</small><b>WhatsApp Auto Service</b><em>+91 81282 42316</em></div><i>→</i></a>
+</aside>
+</div>
+</section>
+<section class="smart-discovery-section" id="smartDiscovery">
+<div class="shell">
+<div class="smart-discovery-head">
+<div>
+<span class="smart-kicker">SMART CATALOGUE SEARCH</span>
+<h2>Search by <em>Vehicle</em></h2>
+<p>Use the current Segment, Vehicle and Model mapping. Vehicle-number and image matching are ready for API/data mapping.</p>
+</div>
+<form class="registration-search" id="registrationSearchForm">
+<label for="registrationNumber">Search by vehicle number:</label>
+<div class="registration-control">
+<div class="number-plate"><span>IND</span><input autocomplete="off" id="registrationNumber" inputmode="text" maxlength="15" placeholder="GJ 05 AB 1234" type="text"/></div>
+<button aria-label="Search vehicle number" type="submit">⌕</button>
+</div>
+</form>
+</div>
+<div class="smart-vehicle-bar">
+<label><span>Segment</span><select id="smartSegment"><option value="">Select Segment</option></select></label>
+<label><span>Vehicle / Maker</span><select id="smartVehicle"><option value="">Select Vehicle</option></select></label>
+<label><span>Model</span><select id="smartModel"><option value="">Select Model</option></select></label>
+<label class="smart-keyword"><span>Part / Category / Number</span><input id="smartKeyword" placeholder="Part number, product or category" type="search"/></label>
+<button class="smart-search-button" id="smartSearchButton" type="button">Search Parts</button>
+</div>
+<div aria-live="polite" class="lookup-message" id="registrationLookupResult"></div>
+<div class="visual-search-panel">
+<div class="visual-search-copy">
+<span class="visual-icon">◉</span>
+<div><h3>Search Product by Photo</h3><p>Upload an existing image or take a photo from mobile. Matching results will use the configured visual-search API or manual mapping file.</p></div>
+</div>
+<div class="visual-search-actions">
+<input accept="image/*" capture="environment" hidden="" id="partImageInput" type="file"/>
+<button id="partImageButton" type="button">📷 Upload / Take Photo</button>
+<input id="partImageHint" placeholder="Optional: part name or number" type="search"/>
+<button id="partImageSearchButton" type="button">Find Matching Parts</button>
+</div>
+<div class="visual-search-preview" hidden="" id="partImagePreview"><img alt="Uploaded part preview"/><button id="clearPartImage" type="button">×</button></div>
+<div aria-live="polite" class="visual-search-status" id="visualSearchStatus"></div>
+<div class="visual-search-results" id="visualSearchResults"></div>
+</div>
+</div>
+</section>
+<section class="service-benefits"><div class="shell service-benefit-grid"><div><i>↺</i><span><b>Easy Enquiry</b><small>Fast WhatsApp assistance</small></span></div><div><i>🚚</i><span><b>Delivery Network</b><small>Coordinated dispatch support</small></span></div><div><i>✓</i><span><b>Trusted Since 1997</b><small>Long-standing market presence</small></span></div><div><i>☎</i><span><b>Customer Care</b><small>+91 70465 33330</small></span></div></div></section>
+<section class="home-section" id="featured">
+<div class="shell">
+<div class="home-section-head featured-head"><div><h2>Featured Products</h2><p>Choose any catalogue category and browse 25 products per page.</p></div>
+<div class="featured-category-picker featured-brand-picker" id="featuredBrandPicker">
+<button class="featured-category-toggle" id="featuredBrandToggle" type="button"><span>AAYUB</span><i>⌄</i></button>
+<div class="featured-category-menu" hidden="" id="featuredBrandMenu">
+<input autocomplete="off" id="featuredBrandSearch" placeholder="Search brands..." type="search"/>
+<div class="featured-category-options" id="featuredBrandOptions"></div>
+</div>
+</div><div class="featured-category-picker" id="featuredCategoryPicker">
+<button class="featured-category-toggle" id="featuredCategoryToggle" type="button"><span>All Product Categories</span><i>⌄</i></button>
+<div class="featured-category-menu" hidden="" id="featuredCategoryMenu">
+<input autocomplete="off" id="featuredCategorySearch" placeholder="Search product categories..." type="search"/>
+<div class="featured-category-options" id="featuredCategoryOptions"></div>
+</div>
+</div>
+<a href="shop.html" id="featuredViewAll">View All →</a>
+</div><div class="featured-advanced-search" hidden="" id="featuredAdvancedSearch">
+<div class="advanced-search-title"><b>Advanced Product Search</b><span>Selected brand ke andar Segment, Vehicle aur Model se filter karein.</span></div>
+<label>Segment<select id="featuredSegment"><option value="">All Segments</option></select></label>
+<label>Vehicle<select id="featuredVehicle"><option value="">All Vehicles</option></select></label>
+<label>Model<select id="featuredModel"><option value="">All Models</option></select></label>
+<button id="featuredClearAdvanced" type="button">Clear</button>
+</div>
+<div class="home-product-grid compact-featured" id="featuredProducts"><div class="home-loading">Loading AAYUB products…</div></div>
+<nav aria-label="Featured product pages" class="home-pagination" id="featuredPagination"></nav>
+</div>
+</section>
+<section class="promo-image-section"><div class="shell promo-image-grid promo-image-grid-top">
+<a href="shop.html?search=Oil#shop"><img alt="Premium Engine Oils" src="assets/promo-engine-oils.png"/></a>
+<a href="shop.html?search=Wheel#shop"><img alt="Wheel Hub and Tyre Components" src="assets/promo-wheel-hub.png"/></a>
+<a href="shop.html?search=Engine#shop"><img alt="Wholesale Product Range" src="assets/promo-vehicle-potential.png"/></a>
+</div></section>
+<section class="promo-image-section"><div class="shell promo-image-grid promo-image-grid-wide">
+<a href="shop.html#shop"><img alt="Genuine Auto Parts Trade Pricing" src="assets/promo-trade-pricing.png"/></a>
+<a href="shop.html#shop"><img alt="Automotive Parts and Hardware" src="assets/promo-parts-hardware.png"/></a>
+</div></section>
+<section class="home-section countdown-deals">
+<div class="shell"><div class="home-section-head"><div><h2>Latest Deals for This Week</h2><p>Products with the highest Sales / Qty Sold values from the catalogue data.</p></div><div class="big-countdown"><span id="dealDays">07</span><i>:</i><span id="dealHours">00</span><i>:</i><span id="dealMins">00</span><i>:</i><span id="dealSecs">00</span></div><a href="shop.html#shop">View All →</a></div><div class="horizontal-deals" id="horizontalDeals"></div></div>
+</section>
+<section class="full-banner engine-feature-banner">
+<div class="shell full-banner-inner">
+<div class="engine-feature-copy">
+<small>Automotive Components for Every Application</small>
+<h2>Find the Right Engine and Vehicle Parts Faster</h2>
+<p>Search the catalogue by segment, vehicle, model, category or part number.</p>
+<a href="shop.html#shop">Explore Catalogue →</a>
+</div>
+<div class="engine-promo-media"><img alt="Automotive engine assembly" data-engine-promo="" src="assets/engine-promo-transparent.png"/></div>
+</div>
+</section>
+<section class="home-section category-carousel-section" id="categories">
+<div class="shell">
+<div class="home-section-head"><div><h2>Our Product Categories</h2><p>Category images are generated from DATA_INPUT/categories and rotate automatically.</p></div>
+<div class="carousel-controls"><button data-category-prev="" type="button">‹</button><span class="category-carousel-status">1 / 1</span><button data-category-next="" type="button">›</button></div>
+</div>
+<div class="product-category-carousel" data-category-carousel="">
+<div class="product-category-rail"><div class="home-loading">Loading categories…</div></div>
+</div>
+</div>
+</section>
+<section class="mini-promos"><div class="shell mini-promos-grid"><a href="shop.html#shop"><small>On Sale This Week</small><h3>Proud Supplier of Quality Vehicle Parts</h3><span>Shop Now →</span><i>🚚</i></a><a href="about.html"><small>Since 1997</small><h3>Your Trusted Automotive Parts Partner</h3><span>About Us →</span><i>✓</i></a><a href="shop.html?search=Wheel#shop"><small>Wide Selection</small><h3>Different Types of Wheel Components Available</h3><span>Shop Now →</span><i>◎</i></a></div></section>
+<section class="promo-code-band"><div class="shell automotive-tagline"><strong>Genuine Auto Parts. Reliable Supply. Stronger Journeys.</strong></div></section>
+<section class="home-section segment-directory-section" id="segments-directory"><div class="shell"><div class="home-section-head"><div><span>PRODUCT RANGE</span><h2>Shop by Segment</h2><p>Segment images and counts are generated from DATA_INPUT.</p></div><a href="shop.html#shop">View all products →</a></div><div class="uploaded-overview"><img alt="Raj Agencies product segments" data-segments-overview="" src="assets/segments-overview.png"/></div><div class="segment-directory-grid" data-segment-grid=""><div class="home-loading">Loading segments…</div></div></div></section>
+<section class="partners-section" id="partners"><div class="shell"><div class="home-section-head centered"><div><h2>Our Business Partners</h2><p>Brand logos are loaded only from DATA_INPUT/brands. Each image filename is used as the brand name.</p></div></div><div class="partner-rail" id="partnerRail"><div class="home-loading">Loading brands…</div></div></div></section>
+<section class="home-section customer-review-section" id="reviews">
+<div class="shell">
+<div class="home-section-head centered">
+<div><span>CUSTOMER FEEDBACK</span><h2>Our Good Customers</h2><p>Customers can submit their experience. Positive reviews are displayed below.</p></div>
+</div>
+<div class="customer-review-layout">
+<div class="customer-review-grid" id="customerReviewGrid"><div class="home-loading">Loading customer reviews…</div></div>
+<form class="customer-review-form" id="customerReviewForm">
+<span class="review-form-kicker">SHARE YOUR EXPERIENCE</span>
+<h3>Write a Customer Review</h3>
+<div class="review-form-row"><label>Your Name<input maxlength="60" name="name" placeholder="Customer name" required=""/></label><label>City / Business<input maxlength="60" name="location" placeholder="City or business type" required=""/></label></div>
+<label>Rating<select name="rating" required=""><option value="5">5 — Excellent</option><option value="4">4 — Very Good</option><option value="3">3 — Good</option><option value="2">2 — Fair</option><option value="1">1 — Poor</option></select></label>
+<label>Your Review<textarea maxlength="500" name="message" placeholder="Tell us about product range, service or support" required="" rows="5"></textarea></label>
+<button type="submit">Submit Review</button>
+<p aria-live="polite" class="review-form-status" id="customerReviewStatus"></p>
+<small>Static demo mode: reviews are saved on this device. A shared review API can be connected later.</small>
+</form>
+</div>
+</div>
+</section><section class="final-enquiry-section" id="website-enquiry"><div class="shell final-enquiry-grid">
+<div class="final-enquiry-card"><img alt="" class="enquiry-watermark" src="assets/raj-logo.png"/><div class="enquiry-content"><span class="section-kicker">DIRECT BUSINESS SUPPORT</span><h2>Send Your Enquiry</h2><p>Share your requirement, part number or order-related question. Our team will receive it in the Admin Panel and reply from there.</p><form id="footerEnquiryForm"><div class="enquiry-fields"><label>Name<input maxlength="120" name="name" placeholder="Customer / Party name" required=""/></label><label>Mobile Number<input maxlength="20" name="phone" placeholder="+91" required=""/></label><label>Email ID<input maxlength="120" name="email" placeholder="Optional email" type="email"/></label><label>Subject<input maxlength="150" name="subject" placeholder="Product / order enquiry" required=""/></label></div><label>Remark / Requirement<textarea maxlength="3000" name="message" placeholder="Write part number, product details, quantity or your question" required=""></textarea></label><button type="submit">Submit Enquiry</button><p class="enquiry-result" id="footerEnquiryResult"></p></form></div></div>
+<div class="head-office-map"><div class="map-title"><div><span class="section-kicker">HEAD OFFICE</span><h2>Visit Raj Agencies</h2></div><a href="https://maps.app.goo.gl/LtZynkYam41ArEgEA" rel="noopener" target="_blank">Open in Google Maps ↗</a></div><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=01%20Dev%20Darshan%20Complex%20Navagam%20Kamrej%20Surat%20394185&amp;output=embed" title="Raj Agencies Head Office Map"></iframe><p>01 Dev Darshan Complex, Near Patidar Tyre, Opp. Dada Bhagwan Temple, Navagam, Kamrej Char Rasta, Surat – 394185.</p></div>
+</div></section><section class="newsletter">
+<div class="shell newsletter-inner"><div class="newsletter-icon">✉</div><div><span>Join our newsletter for trade updates</span><h2>Get new product, catalogue and promotion information</h2><p>Register to receive important product and service updates from Raj Agencies.</p></div><form id="newsletterForm"><input placeholder="Your email address" required="" type="email"/><button type="submit">Subscribe</button><label><input required="" type="checkbox"/> I agree to receive business updates.</label></form></div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="shell footer-main">
+<div class="footer-company"><img alt="Raj Group" src="assets/raj-logo.png"/><p>Raj Agencies is an automotive spare parts distribution company serving retailers, workshops and channel partners through a wide product portfolio and structured logistics.</p><a href="mailto:info@rajagencies.example">info@rajagencies.example</a><div class="footer-social"><a href="https://www.instagram.com/raj.agencies123/" rel="noopener" target="_blank">Instagram</a><a href="https://www.facebook.com/alpesh.jogani.5076/" rel="noopener" target="_blank">Facebook</a></div></div>
+<div><h4>Need Help?</h4><a class="footer-phone" href="tel:+917046533330">+91 70465 33330</a><p>Monday – Saturday<br/>9:00 AM – 7:00 PM</p><a href="https://wa.me/918128242316" rel="noopener" target="_blank">WhatsApp: +91 81282 42316</a></div>
+<div><h4>Customer Service</h4><a href="contact.html">Help Center</a><button data-open="accountModal" type="button">My Account</button><a href="order-tracking.html">Track Products</a><a href="cart.html">My Orders</a><button data-open="wishlistDrawer" type="button">Your Wishlist</button><a href="returns.html">Return Policy</a></div>
+<div><h4>Store Information</h4><a href="about.html">About Raj Agencies</a><a href="shop.html#shop">Bestsellers</a><a href="shop.html#shop">Latest Products</a><a href="shop.html#shop">New Discounts</a><a href="shop.html#shop">Sale Products</a><a href="branches.html">Branch Network</a></div>
+<div class="footer-booklet"><div class="booklet-icon">▤</div><h4>Company Booklet</h4><p>Download the complete Raj Agencies company profile, infrastructure, services and business information.</p><a class="booklet-download" download="" href="assets/docs/raj-group-company-booklet.pdf">Download PDF <span>↓</span></a></div></div>
+<div class="footer-offers"><div class="shell"><span><b>Trade enquiry support</b> for selected catalogue items <a href="shop.html">Shop now</a></span><span><b>Delivery assistance</b> subject to order and location</span></div></div>
+<div class="footer-bottom"><div class="shell"><div><a href="privacy.html">Privacy Policy</a><a href="order-tracking.html">Order Tracking</a><a href="terms.html">Terms and Conditions</a><a href="returns.html">Refund and Returns Policy</a></div><p>Copyright <span id="year"></span> © Raj Agencies. Customizable website implementation.</p></div></div>
+</footer>
+<div class="mobile-bottom-nav"><a href="index.html"><i>⌂</i><span>Home</span></a><a href="shop.html"><i>▦</i><span>Store</span></a><button id="bottomSearch" type="button"><i>⌕</i><span>Search</span></button><button data-open="wishlistDrawer" type="button"><i>♡</i><span>Wishlist</span></button><button data-open="accountModal" type="button"><i>♙</i><span>Account</span></button></div>
+<aside aria-hidden="true" class="drawer cart-drawer" id="cartDrawer"><div class="drawer-head"><b>Shopping Cart</b><button data-close="" type="button">×</button></div><div class="drawer-content" id="cartItems"><div class="empty-state">No products in the cart.</div></div><div class="drawer-footer"><div><span>Subtotal</span><b id="drawerCartTotal">₹0</b></div><a href="cart.html">View Cart</a><a class="checkout-button" href="checkout.html">Checkout</a></div></aside>
+<aside aria-hidden="true" class="drawer" id="wishlistDrawer"><div class="drawer-head"><b>Your Wishlist</b><button data-close="" type="button">×</button></div><div class="drawer-content" id="wishlistItems"><div class="empty-state">Your wishlist is empty.</div></div></aside>
+<div aria-hidden="true" class="modal" id="accountModal"><div class="modal-card"><button class="modal-close" data-close="" type="button">×</button><div class="account-logo"><img alt="Raj Group" src="assets/raj-logo.png"/></div><h2>My Account</h2><p>Sign in to review orders, saved products and account information.</p><form id="loginForm"><label>Email or phone<input placeholder="Email or mobile number" required="" type="text"/></label><label>Password<input placeholder="Password" required="" type="password"/></label><div class="form-between"><label><input type="checkbox"/> Remember me</label><a href="#">Forgot password?</a></div><button type="submit">Log In</button></form><small>New customer? <a href="#">Create an account</a></small></div></div>
+<div aria-hidden="true" class="quick-view" id="quickView"><div class="quick-view-card"><button class="modal-close" data-close="" type="button">×</button><div class="quick-image"><img class="raj-product-fallback-logo" src="assets/raj-group-product-fallback.png" alt="Raj Group" data-raj-fallback-logo="true"/></div><div class="quick-copy"><small id="quickBrand">RAJ AGENCIES</small><h2 id="quickTitle">Product name</h2><div class="quick-rating">★★★★★ <span>Catalogue product</span></div><div class="quick-price"><span class="quick-price-label">MRP</span><b id="quickPrice">Price on Request</b></div><div class="quick-detail-grid"><div><span>Part Number</span><b id="quickCode">—</b></div><div><span>HSN / GST</span><b id="quickTax">—</b></div><div><span>Unit</span><b id="quickUnit">PCS</b></div><div><span>Category</span><b id="quickCategory">—</b></div><div><span>Segment</span><b id="quickSegment">—</b></div><div><span>Vehicle</span><b id="quickVehicle">—</b></div><div class="quick-wide"><span>Model</span><b id="quickModel">—</b></div><div data-optional-product-field="std" hidden><span>Std. Pkg.</span><b id="quickStdPkg">—</b></div><div data-optional-product-field="crt" hidden><span>Crt. Pkg.</span><b id="quickCrtPkg">—</b></div></div><p class="quick-summary" id="quickDescription">Product details will appear here.</p><ul class="quick-benefits"><li>Catalogue item reference</li><li>Vehicle and model information available</li><li>Confirm final availability before ordering</li></ul><div class="quick-actions"><button id="quickAddCart">Add to cart</button><a id="quickWhatsApp" rel="noopener" target="_blank">Order on WhatsApp</a></div></div></div></div>
+<div class="toast" id="toast"></div>
+<script src="site-config.js"></script>
+<script src="smart-select.js"></script>
+<script src="site-sections.js"></script>
+<script src="category-menu.js"></script>
+<script src="product-image-resolver.js?v=11"></script>
+<script>
+(() => {
+  'use strict';
+  const DEFAULT_GROUP = 'AAYUB';
+  const root = document.getElementById('featuredProducts');
+  const brandLabel = document.querySelector('#featuredBrandToggle span');
+  if (brandLabel) brandLabel.textContent = DEFAULT_GROUP;
+  if (root) root.innerHTML = '<div class="home-loading">Loading AAYUB products…</div>';
+
+  const esc = value => String(value ?? '').replace(/[&<>'"]/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+  }[character]));
+  const money = value => Number(value) > 0
+    ? new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 2 }).format(Number(value))
+    : 'Price on Request';
+  const hash = value => {
+    let number = 2166136261;
+    for (const character of String(value)) {
+      number ^= character.charCodeAt(0);
+      number = Math.imul(number, 16777619);
+    }
+    return Math.abs(number >>> 0);
+  };
+  const rating = product => (3.5 + (hash(`${product.code || ''}r`) % 16) / 10).toFixed(1);
+
+  const card = product => {
+    const price = Number(product.mrp) || Number(product.listRate) || 0;
+    const image = window.RAJProductImages
+      ? window.RAJProductImages.markup(product, 'home')
+      : '<img class="home-product-real-image raj-product-fallback-logo" src="assets/raj-group-product-fallback.png" alt="Raj Group" loading="lazy">';
+    return `<article class="home-product-card" data-id="${esc(product._id)}" data-fast-aayub="true">
+      <span class="home-badge blue part-number-badge">${esc(product.code || 'PART NO.')}</span>
+      <div class="home-product-media" role="button" tabindex="0" title="Catalogue is loading in the background">${image}<div class="home-card-actions"><button type="button" data-action="wish" title="Wishlist">♡</button><button type="button" data-action="quick" title="Quick view">⌕</button></div></div>
+      <div class="home-product-body"><div class="home-product-brand">${esc(product.group || DEFAULT_GROUP)}</div><h3 class="home-product-title"><a href="product.html?id=${encodeURIComponent(product._id)}">${esc(product.description || 'Automotive spare part')}</a></h3><div class="home-rating">★★★★★ <span>${rating(product)}</span></div><div class="home-price"><span class="card-price-label">MRP</span><b>${money(price)}</b></div><div class="home-stock">Part: ${esc(product.code || '—')} · HSN ${esc(product.hsn || '—')} · GST ${esc(product.gst || 0)}%</div><button class="home-add" type="button" data-action="cart">Add to cart</button></div>
+    </article>`;
+  };
+
+  window.__RAJ_FAST_AAYUB__?.then(async products => {
+    if (!root || !products.length || root.querySelector('.home-product-card')) return;
+    const mapped = window.RAJProductImages ? await window.RAJProductImages.apply(products) : products;
+    if (root.querySelector('.home-product-card')) return;
+    root.innerHTML = mapped.map(card).join('');
+    root.dataset.fastGroup = DEFAULT_GROUP;
+    window.RAJProductImages?.enhance(root);
+  });
+})();
+</script>
+
+<script src="home.js?v=12-fast-aayub"></script>
+<script src="reviews.js"></script><script src="smart-search.js"></script>
+</body>
+</html>
