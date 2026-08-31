@@ -1,0 +1,42 @@
+{
+  "scheme": [
+    {
+      "title": "Current Trade Scheme",
+      "description": "Trade scheme documents and circulars will appear here after files are added from the admin panel or DATA_INPUT folder.",
+      "type": "PDF / Excel / Image",
+      "file": ""
+    }
+  ],
+  "offers": [
+    {
+      "title": "Current Offers",
+      "description": "Active product and seasonal offers will be published here with validity dates and downloadable documents.",
+      "type": "Offer document",
+      "file": ""
+    }
+  ],
+  "new-launch": [
+    {
+      "title": "New Product Launches",
+      "description": "New launch images, product catalogues, Excel sheets and supporting PDFs will appear here.",
+      "type": "Image / PDF / Excel",
+      "file": ""
+    }
+  ],
+  "latest-news": [
+    {
+      "title": "Raj Agencies Updates",
+      "description": "Company news, service updates, branch announcements and important customer information will be published here.",
+      "date": "Latest update",
+      "file": ""
+    }
+  ],
+  "gallery": [
+    {
+      "title": "Company Functions & Events",
+      "description": "Dealer meets, exhibitions, training sessions, celebrations and company-event media will appear here.",
+      "type": "Photos & Videos",
+      "file": ""
+    }
+  ]
+}

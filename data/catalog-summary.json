@@ -1,0 +1,20 @@
+{
+  "products": 60000,
+  "groups": 230,
+  "groupWiseCategories": 83,
+  "productCategories": 268,
+  "categoryImages": 168,
+  "brandsWithAssets": 50,
+  "segments": {
+    "LCV": 5032,
+    "CAR": 6307,
+    "HCV": 46501,
+    "TRACTOR": 1556,
+    "2 WHEEL": 57,
+    "EARTHMOVERS": 363,
+    "3 WHEEL": 151,
+    "AGRICULTURE PARTS": 33
+  },
+  "productImages": 0,
+  "updatedAt": "2026-07-15T15:06:00"
+}

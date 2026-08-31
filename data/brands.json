@@ -1,0 +1,416 @@
+[
+  {
+    "name": "AAYUB",
+    "image": "assets/brands/aayub.jpg",
+    "productCount": 91,
+    "aliases": [
+      "AAYUB"
+    ]
+  },
+  {
+    "name": "ALLIED NIPPON",
+    "image": "assets/brands/allied-nippon.jpg",
+    "productCount": 153,
+    "aliases": [
+      "ALLIED NIPPON",
+      "ALLIED"
+    ]
+  },
+  {
+    "name": "ANABOND 696",
+    "image": "assets/brands/anabond-696.jpg",
+    "productCount": 0,
+    "aliases": [
+      "ANABOND 696"
+    ]
+  },
+  {
+    "name": "APPOLO",
+    "image": "assets/brands/appolo.jpg",
+    "productCount": 257,
+    "aliases": [
+      "APPOLO"
+    ]
+  },
+  {
+    "name": "APRISTIC",
+    "image": "assets/brands/apristic.jpg",
+    "productCount": 83,
+    "aliases": [
+      "APRISTIC"
+    ]
+  },
+  {
+    "name": "BLUE BIRD",
+    "image": "assets/brands/blue-bird.jpg",
+    "productCount": 220,
+    "aliases": [
+      "BLUE BIRD"
+    ]
+  },
+  {
+    "name": "BRAVO",
+    "image": "assets/brands/bravo.png",
+    "productCount": 0,
+    "aliases": [
+      "BRAVO"
+    ]
+  },
+  {
+    "name": "BULLDOG",
+    "image": "assets/brands/bulldog.jpg",
+    "productCount": 36,
+    "aliases": [
+      "BULLDOG"
+    ]
+  },
+  {
+    "name": "C.I.",
+    "image": "assets/brands/c.i..jpg",
+    "productCount": 8738,
+    "aliases": [
+      "C.I."
+    ]
+  },
+  {
+    "name": "CHAMPION",
+    "image": "assets/brands/champion.jpg",
+    "productCount": 55,
+    "aliases": [
+      "CHAMPION"
+    ]
+  },
+  {
+    "name": "DELUX BEARINGS",
+    "image": "assets/brands/delux-bearings.jpg",
+    "productCount": 421,
+    "aliases": [
+      "DELUX BEARINGS",
+      "DELUX"
+    ]
+  },
+  {
+    "name": "ELOFIC",
+    "image": "assets/brands/elofic.jpg",
+    "productCount": 191,
+    "aliases": [
+      "ELOFIC"
+    ]
+  },
+  {
+    "name": "EMMBROS",
+    "image": "assets/brands/emmbros.jpg",
+    "productCount": 91,
+    "aliases": [
+      "EMMBROS",
+      "EMMBROSS"
+    ]
+  },
+  {
+    "name": "GATES",
+    "image": "assets/brands/gates.png",
+    "productCount": 1518,
+    "aliases": [
+      "GATES"
+    ]
+  },
+  {
+    "name": "GCPA",
+    "image": "assets/brands/gcpa.jpg",
+    "productCount": 116,
+    "aliases": [
+      "GCPA"
+    ]
+  },
+  {
+    "name": "GEEKAY",
+    "image": "assets/brands/geekay.png",
+    "productCount": 98,
+    "aliases": [
+      "GEEKAY"
+    ]
+  },
+  {
+    "name": "HALDEX",
+    "image": "assets/brands/haldex.jpg",
+    "productCount": 37,
+    "aliases": [
+      "HALDEX"
+    ]
+  },
+  {
+    "name": "JHAVERI",
+    "image": "assets/brands/jhaveri.jpg",
+    "productCount": 135,
+    "aliases": [
+      "JHAVERI"
+    ]
+  },
+  {
+    "name": "JK FENNER",
+    "image": "assets/brands/jk-fenner.jpg",
+    "productCount": 303,
+    "aliases": [
+      "JK FENNER",
+      "FENNER"
+    ]
+  },
+  {
+    "name": "JTF",
+    "image": "assets/brands/jtf.png",
+    "productCount": 0,
+    "aliases": [
+      "JTF"
+    ]
+  },
+  {
+    "name": "KBX",
+    "image": "assets/brands/kbx.jpg",
+    "productCount": 0,
+    "aliases": [
+      "KBX"
+    ]
+  },
+  {
+    "name": "KLIP-WEL",
+    "image": "assets/brands/klip-wel.jpg",
+    "productCount": 0,
+    "aliases": [
+      "KLIP-WEL"
+    ]
+  },
+  {
+    "name": "LAPOX",
+    "image": "assets/brands/lapox.jpg",
+    "productCount": 144,
+    "aliases": [
+      "LAPOX"
+    ]
+  },
+  {
+    "name": "LOCTITE",
+    "image": "assets/brands/loctite.png",
+    "productCount": 60,
+    "aliases": [
+      "LOCTITE"
+    ]
+  },
+  {
+    "name": "LUMAN",
+    "image": "assets/brands/luman.jpg",
+    "productCount": 62,
+    "aliases": [
+      "LUMAN"
+    ]
+  },
+  {
+    "name": "MAGMA INDIA",
+    "image": "assets/brands/magma-india.jpg",
+    "productCount": 342,
+    "aliases": [
+      "MAGMA INDIA",
+      "RJ MAGMA",
+      "RJ MAGMA-OIL"
+    ]
+  },
+  {
+    "name": "MANN FILTER",
+    "image": "assets/brands/mann-filter.png",
+    "productCount": 0,
+    "aliases": [
+      "MANN FILTER",
+      "MANN"
+    ]
+  },
+  {
+    "name": "MEKO",
+    "image": "assets/brands/meko.jpg",
+    "productCount": 460,
+    "aliases": [
+      "MEKO"
+    ]
+  },
+  {
+    "name": "MK GOLD",
+    "image": "assets/brands/mk-gold.jpg",
+    "productCount": 0,
+    "aliases": [
+      "MK GOLD"
+    ]
+  },
+  {
+    "name": "MONROE",
+    "image": "assets/brands/monroe.jpg",
+    "productCount": 1530,
+    "aliases": [
+      "MONROE"
+    ]
+  },
+  {
+    "name": "NEOLITE",
+    "image": "assets/brands/neolite.jpg",
+    "productCount": 0,
+    "aliases": [
+      "NEOLITE"
+    ]
+  },
+  {
+    "name": "NKW BRAKES",
+    "image": "assets/brands/nkw-brakes.jpg",
+    "productCount": 0,
+    "aliases": [
+      "NKW BRAKES"
+    ]
+  },
+  {
+    "name": "POLY GRIP",
+    "image": "assets/brands/poly-grip.jpg",
+    "productCount": 64,
+    "aliases": [
+      "POLY GRIP"
+    ]
+  },
+  {
+    "name": "POOJA FORGE",
+    "image": "assets/brands/pooja-forge.jpg",
+    "productCount": 956,
+    "aliases": [
+      "POOJA FORGE",
+      "POOJA"
+    ]
+  },
+  {
+    "name": "PRIMA",
+    "image": "assets/brands/prima.jpg",
+    "productCount": 132,
+    "aliases": [
+      "PRIMA"
+    ]
+  },
+  {
+    "name": "QH",
+    "image": "assets/brands/qh.jpg",
+    "productCount": 955,
+    "aliases": [
+      "QH"
+    ]
+  },
+  {
+    "name": "RAJNISH",
+    "image": "assets/brands/rajnish.jpg",
+    "productCount": 118,
+    "aliases": [
+      "RAJNISH"
+    ]
+  },
+  {
+    "name": "RAVI AUTO PARTS",
+    "image": "assets/brands/ravi-auto-parts.jpg",
+    "productCount": 14,
+    "aliases": [
+      "RAVI AUTO PARTS",
+      "RAVI"
+    ]
+  },
+  {
+    "name": "RDS",
+    "image": "assets/brands/rds.jpg",
+    "productCount": 586,
+    "aliases": [
+      "RDS"
+    ]
+  },
+  {
+    "name": "REMSONS",
+    "image": "assets/brands/remsons.jpg",
+    "productCount": 89,
+    "aliases": [
+      "REMSONS",
+      "RAMSONS"
+    ]
+  },
+  {
+    "name": "RM",
+    "image": "assets/brands/rm.jpg",
+    "productCount": 0,
+    "aliases": [
+      "RM"
+    ]
+  },
+  {
+    "name": "ROSE",
+    "image": "assets/brands/rose.jpg",
+    "productCount": 1840,
+    "aliases": [
+      "ROSE"
+    ]
+  },
+  {
+    "name": "SADHU FORGING",
+    "image": "assets/brands/sadhu-forging.jpg",
+    "productCount": 0,
+    "aliases": [
+      "SADHU FORGING",
+      "SADHU FORGE"
+    ]
+  },
+  {
+    "name": "SHANCO",
+    "image": "assets/brands/shanco.jpg",
+    "productCount": 68,
+    "aliases": [
+      "SHANCO"
+    ]
+  },
+  {
+    "name": "SORL",
+    "image": "assets/brands/sorl.jpg",
+    "productCount": 251,
+    "aliases": [
+      "SORL"
+    ]
+  },
+  {
+    "name": "SPICER   SVL",
+    "image": "assets/brands/spicer-svl.jpg",
+    "productCount": 241,
+    "aliases": [
+      "SPICER SVL",
+      "SPICER / SVL",
+      "SPICER",
+      "SVL"
+    ]
+  },
+  {
+    "name": "SUPER-LAC",
+    "image": "assets/brands/super-lac.jpg",
+    "productCount": 0,
+    "aliases": [
+      "SUPER-LAC"
+    ]
+  },
+  {
+    "name": "UVAL",
+    "image": "assets/brands/uval.jpg",
+    "productCount": 0,
+    "aliases": [
+      "UVAL"
+    ]
+  },
+  {
+    "name": "VALEO",
+    "image": "assets/brands/valeo.jpg",
+    "productCount": 0,
+    "aliases": [
+      "VALEO"
+    ]
+  },
+  {
+    "name": "VEETHREE",
+    "image": "assets/brands/veethree.jpg",
+    "productCount": 0,
+    "aliases": [
+      "VEETHREE"
+    ]
+  }
+]
